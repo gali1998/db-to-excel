@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/gali1998/db-to-excel#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "exceljs": "^4.1.1",
     "express": "^4.17.1"
   },

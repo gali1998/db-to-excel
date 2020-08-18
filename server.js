@@ -2,19 +2,22 @@
 const express = require('express')
 const app = express()
 const port = 5000
-const ExcelJS = require('exceljs');
+
+const axios = require('axios');
+var helper = require("./apiHelper");
 
  app.get('/', (req, res) => {
-    res.writeHead(200, {
-        'Content-Disposition': 'attachment; filename="file.xlsx"',
-        'Transfer-Encoding': 'chunked',
-        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      })
-      var workbook = new ExcelJS.stream.xlsx.WorkbookWriter({ stream: res })
-      var worksheet = workbook.addWorksheet('some-worksheet')
-      worksheet.addRow(['foo', 'bar']).commit()
-      worksheet.commit()
-      workbook.commit()
+    
+    axios.get('http://experiment-database.herokuapp.com/results').then(result => {
+        res.writeHead(200, {
+            'Content-Disposition': 'attachment; filename="exp.xlsx"',
+            'Transfer-Encoding': 'chunked',
+            'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          })
+          helper.createWorkbook(res, result);
+    }).catch(err => {
+        console.log(err)
+    })
 })
 
 app.listen(port, () => {
