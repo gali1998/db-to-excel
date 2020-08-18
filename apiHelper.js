@@ -14,9 +14,10 @@ function addDataToWorkBook(res, result) {
     participantNumber = 1;
     result.data.forEach(participant  => {
         console.log(participant.id)
-         var worksheet = workbook.addWorksheet("Participant " + participantNumber.toString());
+        ;let v = [{state: 'normal', rightToLeft: true, topLeftCell: 'G1'}]
+         var worksheet = workbook.addWorksheet("Participant " + participantNumber.toString(), {views: v});
          participantNumber++;
-         worksheet.addRow(['foo', 'bar']).commit();
+         worksheet.addRow(['ת"ז:', participant.id]).commit();
 
          worksheet.commit()
      });
