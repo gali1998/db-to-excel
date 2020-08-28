@@ -31,7 +31,7 @@ function addDataToWorkBook(res, result) {
          worksheet.addRow(headers)
 
          // get first date
-         let minimum = getMinimum(participant.results)
+         let minimum = participant.startTime;
         
          if (participant.results != null){
          participant.results.forEach(result => {
